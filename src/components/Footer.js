@@ -38,7 +38,7 @@ function Footer() {
                                 <label for="UserEmail" class="sr-only"> Email </label>
 
                                 <div
-                                    class="border border-gray-100 p-2 focus-within:ring dark:border-gray-800 sm:flex sm:items-center sm:gap-4"
+                                    class="border rounded-md border-gray-100 p-2 focus-within:ring dark:border-gray-800 sm:flex sm:items-center sm:gap-4"
                                 >
                                     <input
                                         type="email"
@@ -48,7 +48,7 @@ function Footer() {
                                     />
 
                                     <button
-                                        class="mt-1 w-full bg-blue-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-blue-600 sm:mt-0 sm:w-auto sm:shrink-0"
+                                        class="mt-1 w-full bg-blue-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white rounded-md transition-none hover:bg-blue-600 sm:mt-0 sm:w-auto sm:shrink-0"
                                     >
                                         Sign Up
                                     </button>
