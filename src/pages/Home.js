@@ -3,6 +3,8 @@ import CartCategory from '../components/Card/CardCategory'
 import CardUsers from '../components/Card/CardUsers'
 import CardProducts from '../components/Card/CardProducts'
 import Loading from '../components/Loading'
+import { Link } from 'react-router-dom'
+import { fetchProducts } from '../services/productAction'
 export default function Home() {
     //decleare variable
     //const [count, setCount] = useState(0)
@@ -12,14 +14,7 @@ export default function Home() {
     const [proIsLoading, setProIsloading] = useState(true)
     const [catIsLoading, setCatIsloading] = useState(true)
     const [userIsLoading, setUserIsloading] = useState(true)
-    const fetchProducts = () => {
-        fetch('https://api.escuelajs.co/api/v1/products?limit=10&offset=30')
-            .then(res => res.json())
-            .then(res => {
-                setProducts(res)
-                setProIsloading(false)
-            })
-    }
+    
     const fetchCategories = () => {
         fetch('https://api.escuelajs.co/api/v1/categories?limit=5')
             .then(res => res.json())
@@ -31,13 +26,18 @@ export default function Home() {
     const fetchUsers = () => {
         fetch('https://api.escuelajs.co/api/v1/users?limit=3')
             .then(res => res.json())
-            .then(res => { 
+            .then(res => {
                 setUser(res)
-                setUserIsloading(false) 
+                setUserIsloading(false)
             })
     }
     useEffect(() => {
+        //call to api
         fetchProducts()
+        .then(resp=>{
+            setProIsloading(false)
+            setProducts(resp)
+        })
         fetchCategories()
         fetchUsers()
     }, [])
@@ -56,13 +56,21 @@ export default function Home() {
                         /* reder list */
                         proIsLoading ? <Loading /> :
                             products.map((product) =>
-                                <CardProducts
-                                    pro_id={product.id}
-                                    pro_price={product.price}
-                                    imageURL={product.images[0]}
-                                    pro_title={product.title}
-                                    desc={product.description}
-                                />
+                                <div 
+                                    key={product.id}>
+
+                                    <Link
+                                        to={`/read/${product.id}`}
+                                    >
+                                        <CardProducts
+                                            pro_id={product.id}
+                                            pro_price={product.price}
+                                            imageURL={product.images[0]}
+                                            pro_title={product.title}
+                                            desc={product.description}
+                                        />
+                                    </Link>
+                                </div>
                             )
                     }
                 </div>
@@ -91,16 +99,16 @@ export default function Home() {
                 <h1 className="text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-black mt-20">Get Users</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 p-5">
                     {
-                        userIsLoading? <Loading/>:
-                        users.map((user) =>
-                            <CardUsers
-                                id={user.id}
-                                name={user.name}
-                                email={user.email}
-                                role={user.role}
-                                avatar={user.avatar}
-                            />
-                        )
+                        userIsLoading ? <Loading /> :
+                            users.map((user) =>
+                                <CardUsers
+                                    id={user.id}
+                                    name={user.name}
+                                    email={user.email}
+                                    role={user.role}
+                                    avatar={user.avatar}
+                                />
+                            )
                     }
                 </div>{/* END USERSS */}
 
