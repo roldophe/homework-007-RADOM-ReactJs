@@ -7,6 +7,11 @@ export default function Dashboard() {
     const [product, setProducts] = useState([])
     const columns = [
         {
+            name: 'ID',
+            selector: row => row.id,
+            sortable: true
+        },
+        {
             name: 'Title',
             selector: row => row.title,
             sortable: true
@@ -14,6 +19,11 @@ export default function Dashboard() {
         {
             name: 'Price',
             selector: row => row.price,
+            sortable: true
+        },
+        {
+            name: 'Description',
+            selector: row => row.description,
             sortable: true
         },
         {

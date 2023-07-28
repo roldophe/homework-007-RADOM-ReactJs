@@ -21,7 +21,7 @@ function Read() {
     }
     useEffect(()=>{
         fetchProduct(id)
-    },[])
+    }, [])
     return (
         <main className="container mx-auto">
             <h1 class="text-start my-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-black">{product.title}</h1>
