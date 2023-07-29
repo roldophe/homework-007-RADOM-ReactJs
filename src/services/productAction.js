@@ -23,18 +23,18 @@ export const insertProduct = async (product) => {
             },
             body: JSON.stringify(product)
         })
-    return resp.json()
+    return resp
 }
 
 //MARK:Funcion to insert file such as image Or PDF , etc.
-export const fileUpload = async (image) => {
+export const fileUploadToServer = async (image) => {
     let resp = await axios({
-        method:"POST",
-        headers:{
-            "Content-Type":"multipart/form-data"
+        method: "POST",
+        headers: {
+            "Content-Type": "multipart/form-data"
         },
-        url:`${base_URL}files/upload`,
-        date:image
+        url: `${base_URL}files/upload`, /* export const base_URL = "https://api.escuelajs.co/api/v1/" */
+        data: image
     })
     return resp
 }
