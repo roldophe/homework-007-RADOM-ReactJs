@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 
 function Navbar() {
     const navigate = useNavigate()
@@ -15,11 +15,27 @@ function Navbar() {
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
                                 {/* <!-- Current: "bg-gray-900 text-white", Default: "black hover:bg-blue-700 hover:text-white" --> */}
-                                <Link to="/datatable" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</Link>
-                                <a href="/" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Team</a>
-                                <a href="/" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
-                                <Link to="/about-us" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</Link>
-                            </div>
+                                <NavLink
+                                    to="/datatable"
+                                    className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                                    aria-current="page"
+                                    >Dashboard
+                                </NavLink>
+                                <NavLink
+                                    to="/"
+                                    className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                                    >Team
+                                </NavLink>
+                                <NavLink
+                                    to="/"
+                                    className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                                    >Projects
+                                </NavLink>
+                                <NavLink
+                                    to="/about-us"
+                                    className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                                    >About
+                                </NavLink></div>
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

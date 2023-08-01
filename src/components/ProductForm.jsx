@@ -45,6 +45,8 @@ export default function ProductForm() {
       .then(resp => {
         product.images = [resp.data.location]
         /* console.log(product.images) */
+
+        //----insert product including image
         insertProduct(product)
           .then(res => res.json())
           .then(res => console.log(res))
