@@ -19,7 +19,7 @@ function Navbar() {
                                     to="/datatable"
                                     className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
                                     aria-current="page"
-                                    >Dashboard
+                                    >Data Table
                                 </NavLink>
                                 <NavLink
                                     to="/"
@@ -58,7 +58,7 @@ function Navbar() {
             <div class="sm:hidden flex justify-center" >
                 <div class="space-y-1 px-2 pb-3 pt-2 dark:text-white ">
                     {/* <!-- Current: "bg-gray-900 text-white", Default: "black hover:bg-blue-700 hover:text-white" --> */}
-                    <Link to="/datatable" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</Link>
+                    <Link to="/datatable" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Data Table</Link>
                     <a href="/" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Team</a>
                     <a href="/" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
                     <Link to="/about-us" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</Link>

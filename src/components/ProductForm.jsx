@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { fetchCategories, fileUploadToServer, insertProduct } from '../services/productAction'
+import { fetchCategories, fileUploadToServer, insertProduct, updateProduct } from '../services/productAction'
+import { useLocation } from 'react-router-dom'
 
-export default function ProductForm() {
+export default function ProductForm({ edit }) {
   const [categories, setCategories] = useState([])
   const [source, setSource] = useState("")
+  const location = useLocation()
   const [product, setProduct] = useState(
     {
       title: "",
@@ -29,32 +31,65 @@ export default function ProductForm() {
   }
 
   const onPreviewImages = (e) => {
-    console.log(e.target.files)
     setSource(e.target.files[0])
   }
   const handleOnSubmit = () => {
     console.log('on submit')
+    ///-----Check condition whether create or update product ------
+    if (edit) {
+      if (source !== "") {
+        const formData = new FormData()
+        formData.append("file", source)
+        fileUploadToServer(formData)
+          .then(resp => {
+            product.images = [resp.data.location]
+            console.log(product.images)
+            updateProduct(product, product.id)
+              .then(res => res.json())
+              .then(res => console.log(res))
+          })
 
-    /* create image object form as form data */
-    const formData = new FormData()
-    formData.append("file", source)
-
-    /* function to upload image data to server  */
-    fileUploadToServer(formData)
-      /* .then(res => console.log(res)) */
-      .then(resp => {
-        product.images = [resp.data.location]
-        /* console.log(product.images) */
-
-        //----insert product including image
-        insertProduct(product)
+      } else {
+        console.log(product.id)
+        updateProduct(product, product.id)
           .then(res => res.json())
           .then(res => console.log(res))
-      })
+      }
+    } else {
+      //--- create image object form as form data ---
+      const formData = new FormData()
+      formData.append("file", source)
+
+      //--- function to upload image data to server ---
+      fileUploadToServer(formData)
+        //--- .then(res => console.log(res)) ---
+        .then(resp => {
+          product.images = [resp.data.location]
+          //--- console.log(product.images) ---
+
+          ///---insert product including image ---
+          insertProduct(product)
+            .then(res => res.json())
+            .then(res => console.log(res))
+        })
+    }
 
     /* insertProduct(product).then(res => console.log(res)) */
   }
   useEffect(() => {
+    console.log(edit)
+    if (edit) {
+
+      console.log(location.state)
+      const { id, title, price, description, category, images } = location.state
+      product.id = id
+      product.title = title
+      product.price = price
+      product.description = description
+      product.categoryId = category.id
+      product.images = images
+      console.log(product.images)
+    }
     fetchCategories()
       .then(res => setCategories(res))
   }, [])
@@ -65,6 +100,7 @@ export default function ProductForm() {
         <input
           type="text"
           name="title"
+          value={product.title}
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="Magic Mouse" required
           onChange={OnChangeHeadler}
@@ -76,6 +112,7 @@ export default function ProductForm() {
         <input
           type="text"
           name="price"
+          value={product.price}
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="300$" required
           onChange={OnChangeHeadler}
@@ -85,6 +122,7 @@ export default function ProductForm() {
         <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Choose a category</label>
         <select
           name="categoryId"
+          value={product.categoryId}
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 "
           onChange={OnChangeHeadler}
 
@@ -102,6 +140,7 @@ export default function ProductForm() {
         <input
           type="text"
           name="description"
+          value={product.description}
           class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={OnChangeHeadler}
         />
@@ -109,7 +148,7 @@ export default function ProductForm() {
       {/* preview area  */}
       <div class='mb-3 preview'>
         <img
-          src={source && URL.createObjectURL(source)}
+          src={source == "" ? product.images[0] : URL.createObjectURL(source)}
           alt="Preview image"
           style={{ width: 200 }}
 
@@ -129,9 +168,10 @@ export default function ProductForm() {
       </div>
       <div class="mb-3">
         <button type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           onClick={() => handleOnSubmit()}
-        >Create Product</button>
+        > {edit ? "Update Product" : " Create Product"}
+        </button>
       </div>
     </main>
   )

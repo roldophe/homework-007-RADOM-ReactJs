@@ -10,6 +10,7 @@ import ProductForm from './components/ProductForm';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import NotFound from './pages/404';
 function App() {
   return (
     <>
@@ -19,8 +20,10 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about-us' element={<About />} />
           <Route path='/read/:id' element={<Read />} />
-          <Route path='/create' element={<ProductForm />} />
+          <Route path='/create' element={<ProductForm edit={false} />} />
+          <Route path='/edit' element={<ProductForm edit={true} />} />
           <Route path='/datatable' element={<Dashboard />} />
+          <Route path='/*' element={<NotFound />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/sigup' element={<Signup />} />

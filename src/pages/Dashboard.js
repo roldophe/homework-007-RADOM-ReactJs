@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import { fetchProducts } from '../services/productAction';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
     //Declared state product
     const [products, setProducts] = useState([])
     const [filterProduct, setFilterProducts] = useState([])
     const [search, setSearch] = useState("")
-
+    const navigate = useNavigate();
     const columns = [
         {
             name: 'ID',
@@ -43,6 +44,10 @@ export default function Dashboard() {
             name: "Action",
             selector: row =>
                 <button
+                    type='button'
+                    onClick={()=>navigate("/edit",{
+                        state: row
+                    })}
                     class="black hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-300 font-sm rounded-lg text-sm px-3 py-2 dark:bg-white dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-gray-800">
                     Edit
                 </button>
