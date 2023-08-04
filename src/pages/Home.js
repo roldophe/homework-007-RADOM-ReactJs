@@ -5,16 +5,19 @@ import CardProducts from '../components/Card/CardProducts'
 import Loading from '../components/Loading'
 import { Link } from 'react-router-dom'
 import { fetchProducts } from '../services/productAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAllProducts } from '../redux/actions/productActions'
 export default function Home() {
     //decleare variable
     //const [count, setCount] = useState(0)
-    const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
     const [users, setUser] = useState([])
     const [proIsLoading, setProIsloading] = useState(true)
     const [catIsLoading, setCatIsloading] = useState(true)
     const [userIsLoading, setUserIsloading] = useState(true)
-    
+
+    const dispatch = useDispatch()
+    const {products}=useSelector(state=>state.prodReducer)
     const fetchCategories = () => {
         fetch('https://api.escuelajs.co/api/v1/categories?limit=5')
             .then(res => res.json())
@@ -31,19 +34,23 @@ export default function Home() {
                 setUserIsloading(false)
             })
     }
+
     useEffect(() => {
         //call to api
-        fetchProducts()
+        /* fetchProducts()
         .then(resp=>{
             setProIsloading(false)
             setProducts(resp)
-        })
+        }) */
         fetchCategories()
         fetchUsers()
+        //subscrip to store
+        dispatch(fetchAllProducts())
     }, [])
     return (
         <>
             <div className="container mx-auto px-4">
+                {console.log(products)}
                 {/* <div>
                     <h1>You Click {count}times</h1>
                     <button onClick={() => setCount(count + 1)}>Click me</button>
@@ -54,8 +61,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5 ">
                     {
                         /* reder list */
-                        proIsLoading ? <Loading /> :
-                            products.map((product) =>
+                        products.map((product) =>
                                 <div 
                                     key={product.id}>
 
@@ -72,6 +78,7 @@ export default function Home() {
                                     </Link>
                                 </div>
                             )
+                            
                     }
                 </div>
                 {/* END PRODUCTS */}

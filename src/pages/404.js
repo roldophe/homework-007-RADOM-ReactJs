@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom'
 export default function NotFound() {
     const navigate = useNavigate()
     return (
-        <div class="w-full flex justify-center mt-16">
-            <div class="bg-gray-800 relative rounded-2xl -mx-4 p-8 space-y-8 max-w-4xl text-center">
+        <div class="w-full flex justify-center mt-16 mb-16">
+            <div class="bg-gray-600 relative rounded-2xl -mx-4 p-8 space-y-8 max-w-4xl text-center">
                 <div class="space-y-4">
                     <h2 class="text-white font-heading font-bold text-2xl">
-                        Page Not Found
+                        Page Not Found!
                     </h2>
 
                     <p class="text-xl text-white">
