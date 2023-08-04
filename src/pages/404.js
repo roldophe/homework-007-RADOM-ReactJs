@@ -17,7 +17,7 @@ export default function NotFound() {
                 </div>
 
                 <button
-                    class="inline-flex items-center justify-center font-medium tracking-tight rounded-lg border transition hover:scale-105 hover:-rotate-1 focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset h-11 px-4 text-lg text-white shadow focus:ring-white border-transparent bg-blue-500 hover:bg-blue-900 focus:bg-yellow-600 focus:ring-offset-yellow-600"
+                    class="inline-flex items-center justify-center font-medium tracking-tight rounded-lg border transition hover:scale-105 hover:-rotate-1 focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset h-11 px-4 text-lg text-white shadow focus:ring-white border-transparent bg-blue-500 hover:bg-blue-900 focus:bg-blue-600 focus:ring-offset-blue-600"
                     onClick={() => navigate("/")}
                 >
                     <span>Back to Home →</span>

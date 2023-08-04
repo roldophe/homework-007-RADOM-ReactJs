@@ -1,10 +1,69 @@
-import { Link, NavLink, useNavigate } from "react-router-dom"
-
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function Navbar() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
     return (
-        <header class="bg-white dark:bg-gray-900">
-            <div class="container mx-auto pl-3" >
+        <header className="bg-violet-600 dark:bg-gray-900 text-white dark:text-indigo-200">
+            <nav class="container mx-auto flex flex-wrap items-center justify-between p-3">
+
+                <Link to="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2.5em" className="fill-blue-100 hover:fill-indigo-200  dark:fill-indigo-200" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z" /></svg>
+                </Link>
+                <div class="flex md:hidden">
+                    <div class="flex md:hidden">
+                        <button id="hamburger" onClick={toggleMenu}>
+                            <img className="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="40" height="40" />
+                            <img className="toggle hidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png" width="40" height="40" />
+                        </button>
+                    </div>
+                </div>
+                <div className={`toggle ${menuOpen ? "" : "hidden"} w-full md:w-auto md:flex  text-right text-bold mt-5 md:mt-0 border-t-2 border-blue-900 md:border-none`}>
+                    <div class="flex space-x-4">
+                        <NavLink
+                            to="/datatable"
+                            className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                            aria-current="page"
+                        >Data Table
+                        </NavLink>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                        >Team
+                        </NavLink>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                        >Projects
+                        </NavLink>
+                        <NavLink
+                            to="/about-us"
+                            className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                        >About
+                        </NavLink>
+                        <NavLink
+                            to="/create"
+                            className={({ isActive }) => isActive ? "flex md:hidden black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : " flex md:hidden black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                        >Insert
+                        </NavLink>
+                    </div>
+                </div>
+                <button href="#"
+                    class="toggle hidden md:flex w-full md:w-auto px-4 py-2 text-right bg-blue-100 hover:bg-blue-500 text-violet-600 hover:text-white md:rounded-lg"
+                    onClick={() => navigate("/create")}
+                >Insert
+                </button>
+            </nav>
+        </header>
+    )
+}
+export default Navbar
+/* <div class="container mx-auto pl-3" >
                 <div class="relative flex h-16 items-center justify-between dark:text-white">
                     <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                         <div class="flex flex-shrink-0 items-center">
@@ -14,28 +73,28 @@ function Navbar() {
                         </div>
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
-                                {/* <!-- Current: "bg-gray-900 text-white", Default: "black hover:bg-blue-700 hover:text-white" --> */}
                                 <NavLink
                                     to="/datatable"
                                     className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
                                     aria-current="page"
-                                    >Data Table
+                                >Data Table
                                 </NavLink>
                                 <NavLink
                                     to="/"
                                     className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
-                                    >Team
+                                >Team
                                 </NavLink>
                                 <NavLink
                                     to="/"
                                     className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
-                                    >Projects
+                                >Projects
                                 </NavLink>
                                 <NavLink
                                     to="/about-us"
                                     className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
-                                    >About
-                                </NavLink></div>
+                                >About
+                                </NavLink>
+                            </div>
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -53,18 +112,30 @@ function Navbar() {
                         </button>
                     </div>
                 </div>
-            </div>
-            {/* Mobile menu, show/hide based on menu state. */}
-            <div class="sm:hidden flex justify-center" >
+            </div> 
+            // Mobile menu, show/hide based on menu state.
+            /* <div class="sm:hidden flex justify-center" >
                 <div class="space-y-1 px-2 pb-3 pt-2 dark:text-white ">
-                    {/* <!-- Current: "bg-gray-900 text-white", Default: "black hover:bg-blue-700 hover:text-white" --> */}
-                    <Link to="/datatable" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Data Table</Link>
-                    <a href="/" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Team</a>
-                    <a href="/" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
-                    <Link to="/about-us" class="black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</Link>
+                    <NavLink
+                        to="/datatable"
+                        className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                        aria-current="page"
+                    >Data Table
+                    </NavLink>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                    >Team
+                    </NavLink>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                    >Projects
+                    </NavLink>
+                    <NavLink
+                        to="/about-us"
+                        className={({ isActive }) => isActive ? "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-blue-900" : "black hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                    >About
+                    </NavLink>
                 </div>
-            </div>
-        </header>
-    )
-}
-export default Navbar
+            </div> */
