@@ -2,7 +2,7 @@ function CardProducts(props) {
     return (
         // <h1>Hello Card From First of React</h1>
         <>
-            <div class="max-w-sm bg-white border border-gray-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="max-w-sm bg-white duration-500 hover:scale-105 border border-gray-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <img class="rounded-t-lg" src={props.imageURL} alt="" />
                 </a>

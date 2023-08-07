@@ -7,7 +7,7 @@ function Read() {
     const[product, setProduct] = useState(
         {
             title: "លក់បាយគុយទាវ",
-            descripion: "លក់នំប័ុង",
+            description: "លក់នំប័ុង",
             images: [
                 "https://th.bing.com/th/id/OIP.Kn-72QDi-ubnRhmePgLgUQHaE8?pid=ImgDet&rs=1"
             ]
@@ -21,12 +21,12 @@ function Read() {
     }
     useEffect(()=>{
         fetchProduct(id)
-    }, [])
+    },[])
     return (
         <main className="container mx-auto">
             <h1 class="text-start my-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-black">{product.title}</h1>
-            <h5 class="text-start my-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-black">{product.descripion}</h5>
-            <img className="mb-5" src={product.images[0]} alt="" />
+            <p class="text-start my-5 text-2xl tracking-tight text-gray-900 dark:text-black">{product.description}</p>
+            <img className="mb-5 " src={product.images[0]} alt="" width={`450px`}/>
         </main>
     )
 }

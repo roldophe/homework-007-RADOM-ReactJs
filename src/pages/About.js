@@ -15,7 +15,7 @@ function About(){
         <main className="container mx-auto px-4">
             {/* <h1 class="text-start my-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-black">{console.log(products)}</h1>  */}
             <h1 className="text-center  mt-10 text-4xl font-bold tracking-tight text-gray-900 dark:text-black ">Get Products</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5 ">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5 mb-10 ">
                     {
                         /* reder list */
                         products.map((product) =>
