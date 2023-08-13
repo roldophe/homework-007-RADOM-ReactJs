@@ -93,7 +93,7 @@ export default function Dashboard() {
         setFilterProducts(result);
     }, [search, products]); */
     return (
-        <DataTable className='container mx-auto'
+        <DataTable className='container mx-auto md:flex'
             columns={columns}
             data={filterProduct}
             pagination

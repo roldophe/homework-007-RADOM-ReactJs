@@ -1,7 +1,7 @@
 function CartCategory(props) {
     return (
         <>
-            <div class="max-w-sm bg-white border border-gray-100 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
                 <a href="#">
                     <img class="rounded-t-lg" src={props.imageURL} alt="" />
                 </a>
