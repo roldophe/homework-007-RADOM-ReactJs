@@ -2,7 +2,6 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './pages/About';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Read from './pages/Read';
 import ProductForm from './components/ProductForm';
@@ -13,7 +12,7 @@ import NotFound from './pages/404';
 import AllProducts from './pages/AllProducts';
 import Home from './pages/Home';
 import AllData from './pages/AllData';
-import { StickyNavbar } from './components/NavbarTesting';
+import { StickyNavbar } from './components/StickyNavbar';
 function App() {
   return (
     <>
@@ -29,7 +28,6 @@ function App() {
           <Route path='/datatable' element={<Dashboard />} />
           <Route path='/*' element={<NotFound />} />
         </Route>
-        <Route path='testing' element={<StickyNavbar/>}/>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
@@ -40,7 +38,8 @@ export default App;
 function MainLayout() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <StickyNavbar/>
       <Outlet />
       <Footer />
     </>

@@ -39,7 +39,7 @@ export default function Home() {
                         </p>
                     </div>
                     <div className='mt-10'>
-                        <Link to="/" class="text-indigo-700 border-2 border-indigo-600 py-3 px-6 rounded inline-flex items-center hover:scale-105 duration:500">
+                        <Link to="/" class="text-indigo-700 border-2 border-indigo-600 py-3 px-6 inline-flex items-center">
                             View More
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 viewBox="0 0 24 24" class="w-6 h-6 ml-2">
