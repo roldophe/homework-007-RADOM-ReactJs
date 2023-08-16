@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Typography,
     Button,
@@ -16,36 +16,44 @@ import {
     LifebuoyIcon,
     PowerIcon,
 } from "@heroicons/react/24/outline";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "../redux/actions/profileAction";
+import secureLocalStorage from "react-secure-storage";
 
-// profile menu component
-const profileMenuItems = [
-    {
-        label: "My Profile",
-        icon: UserCircleIcon,
-    },
-    {
-        label: "Edit Profile",
-        icon: Cog6ToothIcon,
-    },
-    {
-        label: "Inbox",
-        icon: InboxArrowDownIcon,
-    },
-    {
-        label: "Help",
-        icon: LifebuoyIcon,
-    },
-    {
-        label: "Sign Out",
-        icon: PowerIcon,
-    },
-];
 
 export function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
     const closeMenu = () => setIsMenuOpen(false);
+    const dispatch = useDispatch();
+    const { isLogin, auth, } = useSelector((state) => state.authReducer);
+    const { profile } = useSelector((state) => state.profile)
+    useEffect(() => {
+        dispatch(fetchProfile(secureLocalStorage.getItem('auth')));
+    }, [isLogin, auth, dispatch]);
 
+    // profile menu component
+    const profileMenuItems = [
+        {
+            label: "My Profile",
+            icon: UserCircleIcon,
+        },
+        {
+            label: "Edit Profile",
+            icon: Cog6ToothIcon,
+        },
+        {
+            label: "Inbox",
+            icon: InboxArrowDownIcon,
+        },
+        {
+            label: "Help",
+            icon: LifebuoyIcon,
+        },
+        {
+            label: isLogin ? "Sign Out" : "Sign In",
+            icon: PowerIcon,
+        },
+    ];
     return (
         <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
             <MenuHandler>
@@ -59,7 +67,8 @@ export function ProfileMenu() {
                         size="sm"
                         alt="tania andrew"
                         className="border border-gray-900 p-0.5"
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                        src={isLogin ? profile.avatar : "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png"}
+
                     />
                     <ChevronDownIcon
                         strokeWidth={2.5}
@@ -76,8 +85,8 @@ export function ProfileMenu() {
                             key={label}
                             onClick={closeMenu}
                             className={`flex items-center gap-2 rounded ${isLastItem
-                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                    : ""
+                                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                                : ""
                                 }`}
                         >
                             {React.createElement(icon, {

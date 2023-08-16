@@ -54,13 +54,12 @@ export default function Home() {
                         lottieRef={prodRef}
                         loop={false}
                         animationData={animationData}
-                        className='duration:500 hover:scale-105'
                     />
                 </div>
             </div>
             {/* <!--   🛑 jumbotron - Ends Here  --> */}
             <div class="text-center mt-20">
-                <h1 class="font-bold text-xl  sm:text-2xl mb-4">BY POPULAR PRODUCTS</h1>
+                <h1 class="font-bold text-xl text-blue-600 sm:text-2xl mb-4">BY POPULAR PRODUCTS</h1>
                 {/*   <h1 class="text-xl">SHOP WOMEN'S BEST SELLERS</h1> */}
             </div>
             <section id="Projects"
@@ -275,7 +274,7 @@ export default function Home() {
             </section>
             {/* OUR LINES */}
             <div class="bg-white py-16">
-                <h1 class="text-center font-bold text-md  sm:text-xl text-black">TRENDING</h1>
+                <h1 class="text-center font-bold text-md text-blue-600 sm:text-xl text-black">TRENDING</h1>
                 <div class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5">
                     {/* <!--   ✅ Product card 1 - Starts Here 👇 --> */}
                     <div class="bg-neutral-50 rounded-lg shadow-lg p-8">
