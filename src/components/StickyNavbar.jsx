@@ -112,7 +112,7 @@ export function StickyNavbar() {
                     <Button
                         variant="gradient"
                         size="sm"
-                        color="blue"
+                        color=""
                         className="hidden lg:inline-block"
                         onClick={() => navigate("/create")}
                     >
@@ -123,7 +123,7 @@ export function StickyNavbar() {
                         size="sm"
                         color="blue"
                         className="hidden lg:inline-block"
-                        onClick={() => isLogin? dispatch(logout()): navigate("/login")}
+                        onClick={() => isLogin ? dispatch(logout()) : navigate("/login")}
                     >
                         <span>{isLogin ? "Logout" : "LOGIN"}</span>
                     </Button>
@@ -135,7 +135,7 @@ export function StickyNavbar() {
                 <Button
                     variant="gradient"
                     size="sm" fullWidth
-                    color="blue"
+                    color="gray-900"
                     className="container mx-auto mb-2"
                     onClick={() => navigate("/create")}
                 >

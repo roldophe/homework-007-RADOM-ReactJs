@@ -19,18 +19,40 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../redux/actions/profileAction";
 import secureLocalStorage from "react-secure-storage";
+import { useNavigate } from "react-router-dom";
 
 
 export function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const closeMenu = () => setIsMenuOpen(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { isLogin, auth, } = useSelector((state) => state.authReducer);
     const { profile } = useSelector((state) => state.profile)
-    useEffect(() => {
+    /* useEffect(() => {
         dispatch(fetchProfile(secureLocalStorage.getItem('auth')));
-    }, [isLogin, auth, dispatch]);
+    }, [isLogin, auth, dispatch]); */
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await dispatch(fetchProfile(secureLocalStorage.getItem("auth")));
+                // Handle successful response
+            } catch (error) {
+                if (error.response && error.response.status === 401) {
+                    // Handle 401 Unauthorized error
+                    // For example, redirect to the login page or display an error message
+                    console.log("User is not authorized. Redirecting to login page...");
+                } else {
+                    // Handle other errors
+                    console.log("An error occurred while fetching the profile:", error.message);
+                }
+            }
+        };
 
+        if (isLogin && auth) {
+            fetchUserProfile();
+        }
+    }, [isLogin, auth, dispatch]);
     // profile menu component
     const profileMenuItems = [
         {
