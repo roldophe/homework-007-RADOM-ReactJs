@@ -25,7 +25,7 @@ export default function Home() {
         prodRef.current?.play();
     }, []);
     return (
-        <main className='container mx-auto px-5'>
+        <main className='container mx-auto'>
             {/* <!--   ✅ jumbotron - Starts Here 👇 --> */}
             <div class="sm:flex items-center max-w-screen-xl mt-10">
                 <div class="sm:w-1/2">

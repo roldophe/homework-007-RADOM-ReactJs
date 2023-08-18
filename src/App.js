@@ -13,6 +13,7 @@ import AllProducts from './pages/AllProducts';
 import Home from './pages/Home';
 import AllData from './pages/AllData';
 import { StickyNavbar } from './components/StickyNavbar';
+import Myprofile from './pages/Myprofile';
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
           <Route path='/edit' element={<ProductForm edit={true} />} />
           <Route path='/datatable' element={<Dashboard />} />
           <Route path='/*' element={<NotFound />} />
+          <Route path='/my_profile' element={<Myprofile />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
@@ -39,7 +41,7 @@ function MainLayout() {
   return (
     <>
       {/* <Navbar /> */}
-      <StickyNavbar/>
+      <StickyNavbar />
       <Outlet />
       <Footer />
     </>

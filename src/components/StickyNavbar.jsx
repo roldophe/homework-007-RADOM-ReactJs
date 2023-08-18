@@ -48,7 +48,7 @@ export function StickyNavbar() {
             >About
             </NavLink>
             <NavLink
-                to="/login"
+                to="/my_profile"
                 className={({ isActive }) => isActive ? "black hover:text-blue-600 px-3 py-2 text-sm font-medium text-blue-600" : "black hover:text-blue-600 px-3 py-2 text-sm font-medium"}
             >Account
             </NavLink>
@@ -57,7 +57,7 @@ export function StickyNavbar() {
     const { isLogin } = useSelector((state) => state.authReducer);
     return (
         <Navbar className="sticky top-0 z-10 rounded-none bg-gray-900 py-2 lg:py-3">
-            <div className="container mx-auto flex items-center justify-between text-white lg:px-4">
+            <div className="container mx-auto flex items-center justify-between text-white">
                 <div className="flex items-center gap-6">
                     <div className="lg:hidden ">
                         <IconButton
@@ -146,7 +146,7 @@ export function StickyNavbar() {
                     size="sm" fullWidth
                     color="blue"
                     className="container mx-auto mb-2"
-                    onClick={() => navigate("/login")}
+                    onClick={() => isLogin ? dispatch(logout()) : navigate("/login")}
                 >
                     <span>{isLogin ? "Logout" : "LOGIN"}</span>
                 </Button>

@@ -19,6 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../redux/actions/profileAction";
 import secureLocalStorage from "react-secure-storage";
+import { logout } from "../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
 
@@ -33,6 +34,7 @@ export function ProfileMenu() {
         dispatch(fetchProfile(secureLocalStorage.getItem('auth')));
     }, [isLogin, auth, dispatch]); */
     useEffect(() => {
+        console.log("login: ", isLogin)
         const fetchUserProfile = async () => {
             try {
                 const response = await dispatch(fetchProfile(secureLocalStorage.getItem("auth")));
@@ -102,6 +104,7 @@ export function ProfileMenu() {
             <MenuList className="p-1">
                 {profileMenuItems.map(({ label, icon }, key) => {
                     const isLastItem = key === profileMenuItems.length - 1;
+                    const isFirstItem = key === 0;
                     return (
                         <MenuItem
                             key={label}
@@ -120,6 +123,8 @@ export function ProfileMenu() {
                                 variant="small"
                                 className="font-normal"
                                 color={isLastItem ? "red" : "inherit"}
+                                onClick={isLastItem ? () => isLogin ? dispatch(logout()) : navigate("/login") : isFirstItem ? () => isLogin ? navigate("/my_profile") : navigate("/login") : ""}
+
                             >
                                 {label}
                             </Typography>

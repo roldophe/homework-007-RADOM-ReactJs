@@ -16,7 +16,7 @@ export default function AllProducts() {
         dispatch(fetchAllCategories())
     }, [])
     return (
-        <main className="container mx-auto px-5">
+        <main className="container mx-auto">
             <h1 className="text-center  mt-10 text-2xl font-bold tracking-tight text-gray-900 dark:text-black ">Get Products</h1>
             <div className="w-fit mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center justify-center gap-10 mt-10 mb-5 px-5">
                 {
