@@ -91,8 +91,9 @@ export function ProfileMenu() {
                         size="sm"
                         alt="tania andrew"
                         className="border border-gray-900 p-0.5"
-                        src={isLogin ? profile.avatar : "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png"}
-
+                        src={isLogin ? profile?.avatar || "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png" :
+                            "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-800x800.png"}
+                    /* This way, if profile?.avatar is undefined or null, it will fall back to the placeholder image URL. */
                     />
                     <ChevronDownIcon
                         strokeWidth={2.5}
@@ -123,7 +124,15 @@ export function ProfileMenu() {
                                 variant="small"
                                 className="font-normal"
                                 color={isLastItem ? "red" : "inherit"}
-                                onClick={isLastItem ? () => isLogin ? dispatch(logout()) : navigate("/login") : isFirstItem ? () => isLogin ? navigate("/my_profile") : navigate("/login") : ""}
+                                onClick={() => {
+                                    if (isLastItem) {
+                                        isLogin ? dispatch(logout()) : navigate("/login");
+                                    } else if (isFirstItem) {
+                                        isLogin ? navigate("/my_profile") : navigate("/login");
+                                    } else {
+                                        navigate("/");
+                                    }
+                                }}
 
                             >
                                 {label}
